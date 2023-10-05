@@ -181,7 +181,8 @@ func handleMailBody(mailBody string) {
 
 			disposition, params, err := mime.ParseMediaType(p.Header.Get("Content-Disposition"))
 			if err != nil {
-				log.Println("Failed to parse Content-Disposition:", err)
+				// Safe to ignore this one I assume. Image is still being sent.
+				//log.Println("Failed to parse Content-Disposition:", err)
 				continue
 			}
 
