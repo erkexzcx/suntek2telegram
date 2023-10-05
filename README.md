@@ -2,7 +2,7 @@
 
 Blackbox FTP and SMTP server for Suntek trail cameras that forward uploaded pictures to Telegram.
 
-# Motyvation
+# Motivation
 
 On AliExpress there are handful of trail cameras to pick from. The one I purchased is `Suntek HC900LTE` which has 4 modes in total:
 1. Storing higher quality images to SD card. (always enabled)
