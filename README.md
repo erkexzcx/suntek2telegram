@@ -14,7 +14,7 @@ The idea is to get pictures from this camera in a convenient way - Telegram. Inc
 
 Note that this software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software:
 
-_insert_mmsconfig_image_here_
+![preview](https://github.com/erkexzcx/suntek2telegram/blob/main/images/mmsconfig.png?raw=true)
 
 # Getting started
 
@@ -40,17 +40,17 @@ FTP (at least with my camera) is broken and unusable, so I am stuck with SMTP. B
 
 Here is how configuration looks like:
 
-_insert_mmsconfig_ftp_image_here_
+![preview](https://github.com/erkexzcx/suntek2telegram/blob/main/images/mmsconfig_ftp.png?raw=true)
 
-TODO
+APN is configured to your SIM provider (for mobile internet) and the rest points to your FTP server.
 
 ### SMTP method
 
 Here is how configuration looks like:
 
-_insert_mmsconfig_smtp_image_here_
+![preview](https://github.com/erkexzcx/suntek2telegram/blob/main/images/mmsconfig_smtp.png?raw=true)
 
-TODO
+APN is configured to your SIM provider (for mobile internet) and the rest points to your SMTP server. `Email Setting` needs to contain a single random email address.
 
 ## Configuration - suntek2telegram app
 
