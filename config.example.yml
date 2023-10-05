@@ -1,0 +1,24 @@
+# This is Telegram bot API key and ChatID.
+telegram:
+  api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  chat_id: 1234567890
+
+# Configure FTP server
+ftp:
+  enabled: false
+  bind_host: "0.0.0.0"
+  bind_port: 21
+  username: camera
+  password: camerapass
+  # Camera is using passive mode. Public IP and port range is what going
+  # to be advertised to FTP client AND used to upload images...
+  public_ip: "123.123.123.123"
+  passive_ports: 4100-4199
+
+# Configure SMTP server
+smtp:
+  enabled: false
+  bind_host: "0.0.0.0"
+  bind_port: 25
+  username: camera
+  password: camerapass
