@@ -1,20 +1,53 @@
 # suntek2telegram
 
-Blackbox FTP and SMTP server for Suntek trail cameras that forward uploaded pictures to Telegram.
+- [suntek2telegram](#suntek2telegram)
+- [Key features](#key-features)
+- [Suntek cameras](#suntek-cameras)
+  * [Configuration](#configuration)
+  * [Issue with FTP implementation](#issue-with-ftp-implementation)
+- [Getting started](#getting-started)
+  * [Requirements](#requirements)
+  * [Configuration - camera](#configuration---camera)
+    + [Preparation](#preparation)
+    + [FTP method](#ftp-method)
+    + [SMTP method](#smtp-method)
+  * [Configuration - suntek2telegram app](#configuration---suntek2telegram-app)
+- [Installation](#installation)
+  * [Docker compose](#docker-compose)
 
-# Motivation
+This application serves as a blackbox FTP and SMTP server specifically designed for Suntek trail cameras, but should work with other SIM-enabled cameras too. Its primary function is to forward the pictures uploaded by the cameras to a designated Telegram (personal or group) chat.
 
-On AliExpress there are handful of trail cameras to pick from. The one I purchased is `Suntek HC900LTE` which has 4 modes in total:
-1. Storing higher quality images to SD card. (always enabled)
-2. Sending them via MMS (MMS is not cheap/free where I live - not an option)
-3. SMTP (sending images via SMTP server, as attachments to emails)
-4. FTP (uploading to FTP, but the **implementation is broken** and it stops working in 3-48 hours).
+# Key features
 
-The idea is to get pictures from this camera in a convenient way - Telegram. Incredibly useful if you are not alone who is interested in those pictures and you can get pictures in Telegram group.
+* **FTP Server**: The FTP server is designed to receive images from the trail cameras. However, it doesn't alter or store any files on the server. It simply acts as a conduit to receive the images and forward them to Telegram.
+* **SMTP Server**: The SMTP server is implemented to make the camera believe it's interacting with a real email service. However, it doesn't send any emails. Its sole purpose is to receive the images from the camera and forward them to Telegram.
 
-Note that this software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software:
+In essence, this application acts as a blackbox, mimicking the behavior of real FTP and SMTP servers to receive images from Suntek trail cameras and forward them to Telegram.
+
+# Suntek cameras
+
+## Configuration
+
+This software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software:
 
 ![preview](https://github.com/erkexzcx/suntek2telegram/blob/main/images/mmsconfig.png?raw=true)
+
+## Issue with FTP implementation
+
+On AliExpress there are handful of trail cameras to pick from. The one I purchased is `Suntek HC900LTE`.
+
+I am a bit too lazy to provide actual logs, but here is how communication works with FTP at first:
+1. Device connects to FTP server.
+2. Gets FTP os info.
+3. Sets current working directory to specified directory in camera's config.
+4. Switches to binary mode.
+5. Switches to passive mode and gets passive port from FTP server.
+6. Uploads file.
+7. Exits.
+
+After 3-48 hours, the implementation _breaks_ and it basically becomes steps 1-3 only. Looking at errors file (on sd card) it shows that it tries to upload, but getting error from modem command, which was translated by ChatGPT to be "FTP server not found". Also tried explicitly closing connection after each uploaded image and notifying FTP client that connection is closing prior that - nothing has worked. This sounds like firmware/software bug which cannot be fixed by me. As usually, Suntek support were almost clueless of what is FTP to begin with, so reaching out to them for assistance is out of question.
+
+Initially this software was written for FTP functionality only, but after giving up with FTP, I decided to look into SMTP method and it worked just great!
 
 # Getting started
 
@@ -25,8 +58,6 @@ Linux server with public IP and Docker.
 Suggestions:
 * If you have public IP at home - with some port forwarding and home server (such as RPI) you can easily host this application.
 * Alternatively, feel free to purchase instance at your favorite cloud provider. I prefer `Linode` for their cheapest shared CPU instances.
-
-**Note** that neither method (FTP or SMTP) actually does anything beyond this application's memory. FTP method does **not** alter server files in any way and SMTP does **not** (or attempt to) send any mails. The protocol is only implemented for camera to think it's the real service, but it's actually a blackbox and the only thing it does is simply forward picture to Telegram.
 
 ## Configuration - camera
 
@@ -91,20 +122,3 @@ services:
     environment:
       - TZ=Europe/Vilnius
 ```
-
-# Misc
-
-## What's up with FTP support
-
-I am a bit too lazy to provide actual logs, but here is how communication works with FTP at first:
-1. Device connects to FTP server.
-2. Gets FTP os info.
-3. Sets current working directory to specified directory in camera's config.
-4. Switches to binary mode.
-5. Switches to passive mode and gets passive port from FTP server.
-6. Uploads file.
-7. Exits.
-
-After 3-48 hours, the implementation breaks and it basically becomes steps 1-3 only. Looking at errors file (on sd card) it shows that it tries to upload, but getting error from modem command, which was translated by ChatGPT to be "FTP server not found". Also tried explicitly closing connection after each uploaded image and notifying FTP client that connection is closing prior that - nothing has worked. This sounds like firmware/software bug which cannot be fixed by me.
-
-Initially this software was written for FTP functionality only, but after giving up with FTP, I decided to look into SMTP method and it worked just as good as FTP, just never stopped working. So now you know a bit of backstory of this application. :)
