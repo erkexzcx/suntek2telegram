@@ -92,7 +92,7 @@ Then, if using FTP method:
 1. Ensure `ftp.enabled: true`.
 2. Update `ftp.bind_host` and `ftp.bind_port` if needed.
 3. Set `ftp.username` and `ftp.password` to match of what you configured in camera FTP configuration.
-4. Update FTP passive ports range (if needed). Ensure it is also port-forwarded directly as is if your server is behind the NAT.
+4. If needed, update `public_ip` and `passive_ports` fields too.
 
 Or if using SMTP method:
 1. Ensure `smtp.enabled: true`.
