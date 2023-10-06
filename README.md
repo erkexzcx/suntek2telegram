@@ -1,6 +1,5 @@
 # suntek2telegram
 
-- [suntek2telegram](#suntek2telegram)
 - [Key features](#key-features)
 - [Suntek cameras](#suntek-cameras)
   * [Configuration](#configuration)
