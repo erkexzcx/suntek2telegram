@@ -7,7 +7,7 @@ ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT
 ARG version
-RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM=${TARGETVARIANT#v} go build -a -ldflags "-w -s -X main.version=$version" -o suntek2telegram ./cmd/ftpcam/main.go
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM=${TARGETVARIANT#v} go build -a -ldflags "-w -s -X main.version=$version" -o suntek2telegram ./cmd/suntek2telegram/main.go
 
 FROM scratch
 COPY --from=builder /etc/ssl/cert.pem /etc/ssl/
