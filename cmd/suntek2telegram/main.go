@@ -15,11 +15,19 @@ import (
 )
 
 var (
+	version string
+	
 	flagConfigPath = flag.String("conf", "config.yml", "Path to config file")
+	flagVersion    = flag.Bool("version", false, "prints version of the application")
 )
 
 func main() {
 	flag.Parse()
+
+	if *flagVersion {
+		fmt.Println("Version:", version)
+		return
+	}
 
 	c, err := config.New(*flagConfigPath)
 	if err != nil {
