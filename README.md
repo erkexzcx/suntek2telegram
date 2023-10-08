@@ -99,9 +99,7 @@ Or if using SMTP method:
 2. Update `smtp.bind_host` and `smtp.bind_port` if needed.
 3. Set `smtp.username` and `smtp.password` to match of what you configured in camera SMTP configuration.
 
-# Installation
-
-Only Docker images are provided. I am too lazy to provide actual binary releases. :(
+# Usage
 
 ## Docker compose
 
@@ -118,6 +116,8 @@ services:
       - 8123:8123/tcp
       # Port range is only used for FTP PassivePorts functionality:
       #- 4100-4199:4100-4199/tcp
-    environment:
-      - TZ=Europe/Vilnius
 ```
+
+## Binary releases
+
+See [latest release](https://github.com/erkexzcx/suntek2telegram/releases/latest).
