@@ -11,8 +11,9 @@
     + [FTP method](#ftp-method)
     + [SMTP method](#smtp-method)
   * [Configuration - suntek2telegram app](#configuration---suntek2telegram-app)
-- [Installation](#installation)
+- [Usage](#usage)
   * [Docker compose](#docker-compose)
+  * [Binary releases](#binary-releases)
 
 This application serves as a blackbox FTP and SMTP server specifically designed for Suntek trail cameras, but should work with other SIM-enabled cameras too. Its primary function is to forward the pictures uploaded by the cameras to a designated Telegram (personal or group) chat.
 
