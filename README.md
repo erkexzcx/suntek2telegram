@@ -28,7 +28,7 @@ In essence, this application acts as a blackbox, mimicking the behavior of real 
 
 ## Configuration
 
-This software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software:
+This software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software. It can be found online. Google for `MMSCONFIG` and you will find a few results from `cnsuntek.com`.
 
 ![preview](https://github.com/erkexzcx/suntek2telegram/blob/main/images/mmsconfig.png?raw=true)
 
@@ -64,8 +64,6 @@ Suggestions:
 ### Preparation
 
 FTP (at least with my camera) is broken and unusable, so I am stuck with SMTP. Basically decide which one you would like to use. Changing it is easy in this application's configuration, but might be difficult to change in camera (pull out SD card, generate config, upload config, insert SD card etc.)
-
-`MMSCONFIG` software (used to configure camera) can be found online. Google for `MMSCONFIG` and you will find a few results from `cnsuntek.com`.
 
 ### FTP method
 
