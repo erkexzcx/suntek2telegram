@@ -11,8 +11,9 @@
     + [FTP method](#ftp-method)
     + [SMTP method](#smtp-method)
   * [Configuration - suntek2telegram app](#configuration---suntek2telegram-app)
-- [Installation](#installation)
+- [Usage](#usage)
   * [Docker compose](#docker-compose)
+  * [Binary releases](#binary-releases)
 
 This application serves as a blackbox FTP and SMTP server specifically designed for Suntek trail cameras, but should work with other SIM-enabled cameras too. Its primary function is to forward the pictures uploaded by the cameras to a designated Telegram (personal or group) chat.
 
@@ -27,7 +28,7 @@ In essence, this application acts as a blackbox, mimicking the behavior of real 
 
 ## Configuration
 
-This software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software:
+This software should work with all Suntek cameras that have SIM card for network connectivity and configured with `MMSCONFIG` software. It can be found online. Google for `MMSCONFIG` and you will find a few results from `cnsuntek.com`.
 
 ![preview](https://github.com/erkexzcx/suntek2telegram/blob/main/images/mmsconfig.png?raw=true)
 
@@ -64,8 +65,6 @@ Suggestions:
 
 FTP (at least with my camera) is broken and unusable, so I am stuck with SMTP. Basically decide which one you would like to use. Changing it is easy in this application's configuration, but might be difficult to change in camera (pull out SD card, generate config, upload config, insert SD card etc.)
 
-`MMSCONFIG` software (used to configure camera) can be found online. Google for `MMSCONFIG` and you will find a few results from `cnsuntek.com`.
-
 ### FTP method
 
 Here is how configuration looks like:
@@ -99,9 +98,7 @@ Or if using SMTP method:
 2. Update `smtp.bind_host` and `smtp.bind_port` if needed.
 3. Set `smtp.username` and `smtp.password` to match of what you configured in camera SMTP configuration.
 
-# Installation
-
-Only Docker images are provided. I am too lazy to provide actual binary releases. :(
+# Usage
 
 ## Docker compose
 
@@ -118,6 +115,8 @@ services:
       - 8123:8123/tcp
       # Port range is only used for FTP PassivePorts functionality:
       #- 4100-4199:4100-4199/tcp
-    environment:
-      - TZ=Europe/Vilnius
 ```
+
+## Binary releases
+
+See [latest release](https://github.com/erkexzcx/suntek2telegram/releases/latest).
