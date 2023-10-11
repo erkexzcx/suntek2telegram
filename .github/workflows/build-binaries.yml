@@ -37,9 +37,6 @@ jobs:
           filename="${reponame}_${version}_${GOOS}_${fullarch}"
           
           go build -ldflags "-w -s -X main.version=$version -extldflags '-static'" -o "$filename" cmd/$reponame/main.go
-
-          echo "$filename"
-          ls -l $filename
           
           echo "FILENAME=$filename" >> $GITHUB_ENV
 
